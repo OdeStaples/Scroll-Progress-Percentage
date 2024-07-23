@@ -1,0 +1,30 @@
+*,*::before,*::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1{
+  text-align: center;
+}
+
+.wrapper{
+  height: 100%;
+  width: 60%;
+}
+
+.progress-bar{
+  height: 4px;
+  width: 0%;
+  background-color: red;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
