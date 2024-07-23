@@ -7,7 +7,8 @@ const scrollEvent$ = fromEvent(document, "scroll");
 
 // set the width
 const progress$ = scrollEvent$
-  .pipe(map((event) => calculateScrollPercentage(event.target.documentElement)))
+  // parameter destructuring - passing {target} is same as passing event
+  .pipe(map(({ target }) => calculateScrollPercentage(target.documentElement)))
   .subscribe((percentage) => (progressBar.style.width = `${percentage}%`));
 
 // calculate width
