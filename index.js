@@ -1,4 +1,4 @@
-const { fromEvent, pluck, map } = rxjs;
+const { fromEvent, map } = rxjs;
 
 const progressBar = document.querySelector(".progress-bar");
 
