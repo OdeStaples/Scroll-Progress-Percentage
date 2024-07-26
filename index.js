@@ -1,4 +1,4 @@
-const { fromEvent, map, throttleTime } = rxjs;
+const { fromEvent, map, throttleTime, asyncScheduler } = rxjs;
 
 const progressBar = document.querySelector(".progress-bar");
 
@@ -9,7 +9,7 @@ const scrollEvent$ = fromEvent(document, "scroll");
 const progress$ = scrollEvent$
   // parameter destructuring - passing {target} is same as passing event
   .pipe(
-    throttleTime(30), // limits the call to calculateScrollPercentage
+    throttleTime(30, asyncScheduler, { leading: false, trailing: true }), // limits the call to calculateScrollPercentage, calculates the progress pecent atmost every 30ms
     map(({ target }) => calculateScrollPercentage(target.documentElement))
   )
   .subscribe((percentage) => (progressBar.style.width = `${percentage}%`));
