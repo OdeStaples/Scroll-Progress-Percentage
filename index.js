@@ -1,4 +1,4 @@
-const { fromEvent, map } = rxjs;
+const { fromEvent, map, throttleTime } = rxjs;
 
 const progressBar = document.querySelector(".progress-bar");
 
@@ -8,7 +8,10 @@ const scrollEvent$ = fromEvent(document, "scroll");
 // set the width
 const progress$ = scrollEvent$
   // parameter destructuring - passing {target} is same as passing event
-  .pipe(map(({ target }) => calculateScrollPercentage(target.documentElement)))
+  .pipe(
+    throttleTime(30), // limits the call to calculateScrollPercentage
+    map(({ target }) => calculateScrollPercentage(target.documentElement))
+  )
   .subscribe((percentage) => (progressBar.style.width = `${percentage}%`));
 
 // calculate width
